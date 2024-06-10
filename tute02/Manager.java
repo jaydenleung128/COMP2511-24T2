@@ -1,74 +1,63 @@
-class Employee {
-    private String name;
-    private int salary;
+import java.time.LocalDate;
+
+public class Manager extends Employee {
+    private LocalDate hireDate;
 
     /**
-     * Creates an Employee with the given name and salary.
-     * @param name The full name of the employee.
-     * @param salary The employee's yearly salary in dollars.
+     * Create a manager with the given name, salary and hiring date.
+     * @param name The full name of the manager.
+     * @param salary The manager's salary in dollars.
+     * @param hireDate The date the manager was hired.
      */
-    public Employee(String name, int salary) {
-        this.name = name;
-        this.salary = salary;
+    public Manager(String name, int salary, LocalDate hireDate) {
+        super(name, salary);
+        this.hireDate = hireDate;
     }
 
     /**
-     * Returns the employee's name
-     * @return The full name of the employee.
+     * Create a manager with the given name and salary.
+     *
+     * The manager is recorded as having been hired today.
+     *
+     * @param name The full name of the manager.
+     * @param salary The manager's salary in dollars.
+     * @param hireDate The date the manager was hired.
      */
-    public String getName() {
-        return name;
+    public Manager(String name, int salary) {
+        this(name, salary, LocalDate.now());
     }
 
     /**
-     * Sets the employee's name
-     * @param name The employee's new name.
+     * Get the manager's hire date.
+     * @return The date the manager was hired.
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns the employee's salary.
-     * @return The employee's yearly salary in dollars.
-     */
-    public int getSalary() {
-        return salary;
-    }
-
-    /**
-     * Set the employee's salary.
-     * @param salary The employee's yearly salary in dollars.
-     */
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public LocalDate getHireDate() {
+        return hireDate;
     }
 
     @Override
     public String toString() {
-        return getClass().getName() + "[name=" + name + ", salary=" + salary + "]";
+        return super.toString() + "[hireDate=" + hireDate + "]";
     }
 
-    
     @Override
     public boolean equals(Object o) {
         // Check if the compared object is the same instance
         if (this == o) return true;
         
-        // Check if the compared object is null or of different class
-        if (o == null || o.getClass() != this.getClass()) return false;
+        // Check if the compared object is null
+        if (o == null) return false;
         
-        // Cast the compared object to Employee
-        Employee e = (Employee)o;
-        
-        // Check if the names are not equal
-        if (!name.equals(e.getName())) return false;
-        
-        // Check if the salaries are not equal
-        if (salary != e.getSalary()) return false;
-        
-        // If all conditions are satisfied, the objects are considered equal
-        return true;
-    }
+        // Check if the compared object is of a different class
+        if (o.getClass() != this.getClass()) return false;
     
+        // Cast the compared object to Manager
+        Manager manager = (Manager)o;
+        
+        // Check equality of superclass (Employee) attributes
+        if (!super.equals(o)) return false;
+        
+        // Check equality of hireDate attribute
+        return hireDate.equals(manager.getHireDate());
+    }
 }
