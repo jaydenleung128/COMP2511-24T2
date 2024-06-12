@@ -42,15 +42,6 @@ public class Manager extends Employee {
 
     @Override
     public boolean equals(Object o) {
-        // Check if the compared object is the same instance
-        if (this == o) return true;
-        
-        // Check if the compared object is null
-        if (o == null) return false;
-        
-        // Check if the compared object is of a different class
-        if (o.getClass() != this.getClass()) return false;
-    
         // Cast the compared object to Manager
         Manager manager = (Manager)o;
         
